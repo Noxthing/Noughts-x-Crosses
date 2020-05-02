@@ -27,3 +27,23 @@ def C_function_2 (x):
     This function gives you the inverse of any number_str
     """
 	return 1/x
+    
+def Kiwi_Bday(bork):
+	"""
+	This function tells you gives you the birthday of any given Kiwi in the Gibson family household (and vice-versa)
+	"""
+	if bork == "Soft Kiwi":
+		return "17th March 2011"
+	elif bork == "Poor Kiwi":
+		return "17th March 2011"
+	elif bork == "Nice Kiwi":
+		return "1st November 2009"
+	elif bork == "Wise Kiwi":
+		return "25th March 2006"
+	elif bork == "17th March 2011":
+		return "Soft Kiwi or Poor Kiwi"
+	elif bork == "13th December 2008":
+		return "Nice Kiwi"
+	elif bork == "25th March 2006":
+		return "Wise Kiwi"
+
