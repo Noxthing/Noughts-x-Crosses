@@ -53,3 +53,9 @@ c.create_image(600,105,image= photo)
 c.create_text(600,170,text="by Nxxthing",font=font2, fill="white")
 c.create_text(250,425,text="Be the first to align 3 symbols!",font=font3, fill="white",width=200)
 
+#Button
+def callback():
+    print ("click!")
+b = tk.Button(c, text="Click here to play",font=font3,fg= "#123f56",width=8, height=3, command=callback, bg="white", wraplength=200)
+b.place(x=900,y=325)
+c.create_text(950,425,text="Click here to play",font=font3, fill="#123f56",width=200)
