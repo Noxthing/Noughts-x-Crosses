@@ -21,11 +21,14 @@ def draw_cross(sx, sy):
     c.create_line(x1,y1,x2,y2,width=5.0, fill="#1290af")
     c.create_line(x2,y1,x1,y2,width=5.0, fill="#1290af")
 
-# Draw grid
-c.create_line(550,260,550,560,width=5.0, fill="white")
-c.create_line(650,260,650,560,width=5.0, fill="white")
-c.create_line(450,360,750,360,width=5.0, fill="white")
-c.create_line(450,460,750,460,width=5.0, fill="white")
+
+def draw_grid(c,y):
+    # Draw grid
+    c.create_line(550,y,550,y+300,width=5.0, fill="white")
+    c.create_line(650,y,650,y+300,width=5.0, fill="white")
+    c.create_line(450,y+100,750,y+100,width=5.0, fill="white")
+    c.create_line(450,y+200,750,y+200,width=5.0, fill="white")
+draw_grid(c,260)
 
 # Draw Circles
 draw_nought(2,1)
@@ -54,8 +57,17 @@ c.create_text(600,170,text="by Nxxthing",font=font2, fill="white")
 c.create_text(250,425,text="Be the first to align 3 symbols!",font=font3, fill="white",width=200)
 
 #Button
-def callback():
-    print ("click!")
-b = tk.Button(c, text="Click here to play",font=font3,fg= "#123f56",width=8, height=3, command=callback, bg="white", wraplength=200)
+def close_and_open():
+    root.destroy()
+    print ("Please wait for the game to start...")
+    root2=tk.Tk()
+    c=tk.Canvas(root, bg="#123f56", height=600, width=1200)
+    # Draw grid for main game
+    draw_grid(c,150)
+
+c.pack(fill=tk.BOTH, expand=True)
+b = tk.Button(c, text="Click here to play",font=font3,fg= "#123f56",width=8, height=3, command=close_and_open, bg="white", wraplength=200)
 b.place(x=900,y=325)
 c.create_text(950,425,text="Click here to play",font=font3, fill="#123f56",width=200)
+
+
