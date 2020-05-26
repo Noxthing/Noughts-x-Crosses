@@ -61,7 +61,8 @@ def close_and_open():
     root.destroy()
     print ("Please wait for the game to start...")
     root2=tk.Tk()
-    c=tk.Canvas(root, bg="#123f56", height=600, width=1200)
+    c=tk.Canvas(root2, bg="#123f56", height=600, width=1200)
+    c.pack(fill=tk.BOTH, expand=True)
     # Draw grid for main game
     draw_grid(c,150)
 
