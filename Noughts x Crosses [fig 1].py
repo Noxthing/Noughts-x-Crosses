@@ -19,10 +19,11 @@ draw_cross(c, 0, 2,2)
 draw_cross(c, 0, 3,3)
 
 # Draw Victory line
-c.create_arc(480,290,520,330,start=45,extent=180,outline="#eb9d14",width=5.0,style=tk.ARC)
-c.create_arc(680,490,720,530,start=225,extent=180,outline="#eb9d14",width=5.0,style=tk.ARC)
-c.create_line(485,322.5,687.5,525,fill="#eb9d14",width=5.0)
-c.create_line(512.5,295,715,497.5,fill="#eb9d14",width=5.0)
+#c.create_arc(480,290,520,330,start=45,extent=180,outline="#eb9d14",width=5.0,style=tk.ARC)
+#c.create_arc(680,490,720,530,start=225,extent=180,outline="#eb9d14",width=5.0,style=tk.ARC)
+#c.create_line(485,322.5,687.5,525,fill="#eb9d14",width=5.0)
+#c.create_line(512.5,295,715,497.5,fill="#eb9d14",width=5.0)
+c.create_line(465,275,735,545, fill="#eb9d14", width=10.0)
 
 # Name text
 font = tkFont.Font(family='ModernDeco', size=65)
