@@ -39,9 +39,12 @@ c.create_text(250,425,text="Be the first to align 3 symbols!",font=font3, fill="
 def close_and_open():
     root.destroy()
     print ("Please wait for the game to start...")
-    exec (open ("Noughts x Crosses [fig 2].py").read())
+    #exec (open ("Noughts x Crosses [fig 2].py").read())
+    import NxCfig2
 
 c.pack(fill=tk.BOTH, expand=True)
 b = tk.Button(c, text="Click here to play",font=font3,fg= "#123f56",width=8, height=3, command=close_and_open, bg="white", wraplength=200)
 b.place(x=900,y=325)
 c.create_text(950,425,text="Click here to play",font=font3, fill="#123f56",width=200)
+
+root.mainloop()

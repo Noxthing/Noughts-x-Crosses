@@ -23,6 +23,22 @@ is_nought = True
 stop = False
 squares_clicked = {}
 
+def are_squares_same(s1, s2, s3):
+    if s1 in squares_clicked and s2 in squares_clicked and s3 in squares_clicked and squares_clicked[s1] == squares_clicked[s2] == squares_clicked[s3]:
+        return True
+    else:
+        return False
+
+def is_game_finished():
+    for i in range(3):
+        if are_squares_same((i+1,1), (i+1,2), (i+1,3)):
+            return True
+        elif are_squares_same((1,i+1), (2,i+1), (3,i+1)):
+            return True
+    if are_squares_same((1,1),(2,2),(3,3)) or are_squares_same((1,3),(2,2),(3,1)):
+        return True
+    return False
+
 def winner_is_nought():
     for i in range(3):
         if (i+1,1) in squares_clicked and (i+1,2) in squares_clicked and (i+1,3) in squares_clicked and squares_clicked[(i+1,1)] == squares_clicked[(i+1,2)] == squares_clicked[(i+1,3)] == True:
