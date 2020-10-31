@@ -2,26 +2,34 @@ import tkinter as tk
 from graphics import *
 import tkinter.font as tkFont
 
-root=tk.Tk()
-c=tk.Canvas(root, bg="#123f56", height=600, width=1200)
-c.pack(fill=tk.BOTH, expand=True)
+def start():
+    global root, c, font, photo, photo2, photo3, is_nought, stop, squares_clicked
+    root=tk.Tk()
+    c=tk.Canvas(root, bg="#123f56", height=600, width=1200)
+    c.pack(fill=tk.BOTH, expand=True)
 
-# Draw grid for main game
-draw_grid(c,150)
+    # Draw grid for main game
+    draw_grid(c,150)
 
-#Text
-font = tkFont.Font(family='ModernDeco', size=35)
-c.create_text(150,75,text="PLAYER 1",font=font, fill="white",width=200)
-c.create_text(1050,75,text="PLAYER 2",font=font, fill="white",width=200)
-#Turn
-photo = tk.PhotoImage(file="Green Turn.png")
-photo2 = tk.PhotoImage(file="Victory.png")
-photo3 = tk.PhotoImage(file="Game Over.png")
-c.create_image(150,150,image= photo)
+    #Text
+    font = tkFont.Font(family='ModernDeco', size=35)
+    c.create_text(150,75,text="PLAYER 1",font=font, fill="white",width=200)
+    c.create_text(1050,75,text="PLAYER 2",font=font, fill="white",width=200)
+    #Turn
+    photo = tk.PhotoImage(file="Green Turn.png")
+    photo2 = tk.PhotoImage(file="Victory.png")
+    photo3 = tk.PhotoImage(file="Game Over.png")
+    c.create_image(150,150,image= photo)
+    c.bind("<Button-1>", callback)
 
-is_nought = True
-stop = False
-squares_clicked = {}
+    is_nought = True
+    stop = False
+    squares_clicked = {}
+    
+#Replay button
+def close_and_open():
+    root.destroy()
+    start()
 
 def are_squares_same(s1, s2, s3):
     if s1 in squares_clicked and s2 in squares_clicked and s3 in squares_clicked and squares_clicked[s1] == squares_clicked[s2] == squares_clicked[s3]:
@@ -111,22 +119,21 @@ def callback(event):
             
         is_nought = not is_nought
 
-    if game_over():
+    if game_over() or winner_is_nought() or winner_is_cross():
         c.create_rectangle(900,100,1200,200,fill="#123f56", outline="#123f56")
         c.create_rectangle(0,100,300,200,fill="#123f56", outline="#123f56")
-        c.create_image(600,75,image= photo3)
+        font3 = tkFont.Font(family='ModernDeco', size=35)
+        b = tk.Button(c, text="Replay",font=font3,fg= "#123f56",width=8, height=3, command=close_and_open, bg="white", wraplength=200)
+        b.place(x=900,y=265)
+        
         stop = True
+    if game_over():
+        c.create_image(600,75,image= photo3)
     if winner_is_nought():
-        c.create_rectangle(900,100,1200,200,fill="#123f56", outline="#123f56")
-        c.create_rectangle(0,100,300,200,fill="#123f56", outline="#123f56")
         c.create_image(150,150,image= photo2)
         draw_victory_line(c, -110, winner_is_nought())
-        stop = True
     if winner_is_cross():
-        c.create_rectangle(900,100,1200,200,fill="#123f56", outline="#123f56")
-        c.create_rectangle(0,100,300,200,fill="#123f56", outline="#123f56")
         c.create_image(1050,150,image= photo2)
         draw_victory_line(c, -110, winner_is_cross())
-        stop = True
-
-c.bind("<Button-1>", callback)
+        
+start()
