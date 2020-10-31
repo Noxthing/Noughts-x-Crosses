@@ -70,11 +70,7 @@ def winner_is_cross():
         return 8
 
 def game_over():
-    if len(squares_clicked) == 9 and winner_is_nought():
-        return
-    elif len(squares_clicked) == 9 and winner_is_cross():
-        return
-    elif len(squares_clicked) == 9:
+    if len(squares_clicked) == 9:
         return True
 #Play
 def callback(event):
