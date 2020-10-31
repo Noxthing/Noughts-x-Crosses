@@ -1,4 +1,4 @@
-def calc_box_coords(y, sx, sy):
+def calc_coords(y, sx, sy):
     x1 = sx*100+370
     x2 = x1+60
     y1 = sy*100+180+y
@@ -11,11 +11,11 @@ Draws a nought
 c: a Canvas object
 sx: 
     """
-    x1, y1, x2, y2 = calc_box_coords(y, sx, sy)
+    x1, y1, x2, y2 = calc_coords(y, sx, sy)
     c.create_oval(x1,y1,x2,y2,width=5.0, outline="#f26a5a")
 
 def draw_cross(c, y, sx, sy):
-    x1, y1, x2, y2 = calc_box_coords(y, sx, sy)
+    x1, y1, x2, y2 = calc_coords(y, sx, sy)
     c.create_line(x1,y1,x2,y2,width=5.0, fill="#1290af")
     c.create_line(x2,y1,x1,y2,width=5.0, fill="#1290af")
 
@@ -27,19 +27,25 @@ def draw_grid(c,y):
     c.create_line(450,y+100,750,y+100,width=5.0, fill="white")
     c.create_line(450,y+200,750,y+200,width=5.0, fill="white")
 
-def draw_victory_line_h(c, sy):
-    c.create_line(450,(sy+1)*100,750,(sy+1)*100,width=10.0, fill="#eb9d14")
-
-def draw_victory_line_v(c, sx):
-    c.create_line((sx+4)*100,150,(sx+4)*100,450,width=10.0, fill="#eb9d14")
-
-def draw_victory_line_d1(c):
-    c.create_line(450,150,750,450,width=10.0, fill="#eb9d14")
-
-def draw_victory_line_d2(c):
-    c.create_line(750,150,450,450,width=10.0, fill="#eb9d14")
-
-def draw_victory_line_d(c,is_l):
-    x1, x2 = (450, 750) if is_l else (750, 450)
-    y1, y2 = 150, 450
-    c.create_line(x1,y1,x2,y2,width=10.0, fill="#eb9d14")
+def draw_victory_line(c, y, code):
+    if 1<=code<=3:
+        x1, y1, _, y2 = calc_coords(y, 1, code)
+        _, y1, x2, y2 = calc_coords(y, 3, code)
+        sx, sy = x1, (y1+y2)/2
+        fx, fy = x2, (y1+y2)/2
+    elif 4<=code<=6:
+        x1, y1, x2, _ = calc_coords(y, code-3, 1)
+        x1, _, x2, y2 = calc_coords(y, code-3, 3)
+        sx, sy = (x1+x2)/2, y1
+        fx, fy = (x1+x2)/2, y2
+    elif code == 7:
+        x1, y1, _, _ = calc_coords(y, 1, 1)
+        _, _, x2, y2 = calc_coords(y, 3, 3)
+        sx, sy = x1, y1
+        fx, fy = x2, y2
+    elif code == 8:
+        _, y1, x2, _ = calc_coords(y, 3, 1)
+        x1, _, _, y2 = calc_coords(y, 1, 3)
+        sx, sy = x2, y1
+        fx, fy = x1, y2
+    c.create_line(sx,sy,fx,fy, fill="#eb9d14", width=10.0)

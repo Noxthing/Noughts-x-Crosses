@@ -42,23 +42,24 @@ def is_game_finished():
 def winner_is_nought():
     for i in range(3):
         if (i+1,1) in squares_clicked and (i+1,2) in squares_clicked and (i+1,3) in squares_clicked and squares_clicked[(i+1,1)] == squares_clicked[(i+1,2)] == squares_clicked[(i+1,3)] == True:
-            return True
+            return i+4
         if (1,i+1) in squares_clicked and (2,i+1) in squares_clicked and (3,i+1) in squares_clicked and squares_clicked[(1,i+1)] == squares_clicked[(2,i+1)] == squares_clicked[(3,i+1)] == True:
-            return True
+            return i+1
     if (1,1) in squares_clicked and (2,2) in squares_clicked and (3,3) in squares_clicked and squares_clicked[(1,1)] == squares_clicked[(2,2)] == squares_clicked[(3,3)] == True:
-        return True
+        return 7
     if (3,1) in squares_clicked and (2,2) in squares_clicked and (1,3) in squares_clicked and squares_clicked[(3,1)] == squares_clicked[(2,2)] == squares_clicked[(1,3)] == True:
-        return True
+        return 8
+    
 def winner_is_cross():
     for i in range(3):
         if (i+1,1) in squares_clicked and (i+1,2) in squares_clicked and (i+1,3) in squares_clicked and squares_clicked[(i+1,1)] == squares_clicked[(i+1,2)] == squares_clicked[(i+1,3)] == False:
-            return True
+            return i+4
         if (1,i+1) in squares_clicked and (2,i+1) in squares_clicked and (3,i+1) in squares_clicked and squares_clicked[(1,i+1)] == squares_clicked[(2,i+1)] == squares_clicked[(3,i+1)] == False:
-            return True
+            return i+1
     if (1,1) in squares_clicked and (2,2) in squares_clicked and (3,3) in squares_clicked and squares_clicked[(1,1)] == squares_clicked[(2,2)] == squares_clicked[(3,3)] == False:
-        return True
+        return 7
     if (3,1) in squares_clicked and (2,2) in squares_clicked and (1,3) in squares_clicked and squares_clicked[(3,1)] == squares_clicked[(2,2)] == squares_clicked[(1,3)] == False:
-        return True
+        return 8
 
 def game_over():
     if len(squares_clicked) == 9 and winner_is_nought():
@@ -119,11 +120,13 @@ def callback(event):
         c.create_rectangle(900,100,1200,200,fill="#123f56", outline="#123f56")
         c.create_rectangle(0,100,300,200,fill="#123f56", outline="#123f56")
         c.create_image(150,150,image= photo2)
+        draw_victory_line(c, -110, winner_is_nought())
         stop = True
     if winner_is_cross():
         c.create_rectangle(900,100,1200,200,fill="#123f56", outline="#123f56")
         c.create_rectangle(0,100,300,200,fill="#123f56", outline="#123f56")
         c.create_image(1050,150,image= photo2)
+        draw_victory_line(c, -110, winner_is_cross())
         stop = True
 
 c.bind("<Button-1>", callback)
